@@ -1,0 +1,3 @@
+server:
+  port: ${PORT:8087}
+  context-path: ${CONTEXT_PATH:/}
