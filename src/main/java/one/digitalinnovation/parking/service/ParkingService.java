@@ -1,10 +1,10 @@
 package one.digitalinnovation.parking.service;
 
+import one.digitalinnovation.parking.exception.ParkingNotFoundException;
 import one.digitalinnovation.parking.model.Parking;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +19,7 @@ public class ParkingService {
         var id = getUUID();
         var id1 = getUUID();
         Parking parking = new Parking(id, "OMS-1111", "SC", "CELTA", "PRETO");
-        Parking parking1 = new Parking(id1, "DKW-1451", "MS", "VW GOL", "VERMELHO");
         parkingMap.put(id, parking);
-        parkingMap.put(id1, parking1);
     }
 
     public List<Parking> findAll() {
@@ -33,7 +31,11 @@ public class ParkingService {
     }
 
     public Parking findById(String id) {
-        return parkingMap.get(id);
+        Parking parking = parkingMap.get(id);
+        if(parking == null) {
+            throw new ParkingNotFoundException(id);
+        }
+        return parking;
     }
 
     public Parking create(Parking parkingCreate) {
@@ -43,4 +45,21 @@ public class ParkingService {
         parkingMap.put(uuid, parkingCreate);
         return parkingCreate;
     }
+
+    public void delete(String id) {
+        findById(id);
+        parkingMap.remove(id);
+    }
+
+    public Parking update(String id, Parking parkingCreate) {
+        Parking parking = findById(id);
+        parking.setColor(parkingCreate.getColor());
+        parkingMap.replace(id, parking);
+        return parking;
+    }
+
+//    public Parking exit(String id) {
+//        findById(id);
+//        return null;
+//    }
 }
