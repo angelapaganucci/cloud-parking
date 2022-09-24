@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ParkingControllerTestIT {
+class ParkingControllerTestIT extends AbstractContainerBase {
 
     @LocalServerPort
     private int randomPort;
@@ -28,8 +28,7 @@ class ParkingControllerTestIT {
                 .when()
                 .get("/parking")
                 .then()
-                .statusCode(HttpStatus.OK.value())
-                .body("license[0]", Matchers.equalTo("OMS-1111"));
+                .statusCode(HttpStatus.OK.value());
     }
 
     @Test
