@@ -1,5 +1,6 @@
 package one.digitalinnovation.parking.service;
 
+import one.digitalinnovation.parking.controller.dto.ParkingDTO;
 import one.digitalinnovation.parking.exception.ParkingNotFoundException;
 import one.digitalinnovation.parking.model.Parking;
 import one.digitalinnovation.parking.repository.ParkingRepository;

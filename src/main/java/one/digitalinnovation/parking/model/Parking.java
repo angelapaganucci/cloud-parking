@@ -1,13 +1,20 @@
 package one.digitalinnovation.parking.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Parking {
 
-   @Id
+    @Id
     private String id;
     private String license;
     private String state;
@@ -16,9 +23,6 @@ public class Parking {
     private LocalDateTime entryDate;
     private LocalDateTime exitDate;
     private Double bill;
-
-    public Parking() {
-    }
 
     public Parking(String id, String license, String state, String model, String color) {
         this.id = id;
